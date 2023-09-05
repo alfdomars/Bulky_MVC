@@ -4,6 +4,7 @@ using Bulky.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bulky.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230905000932_UpdateProductPropertyType")]
+    partial class UpdateProductPropertyType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,58 +96,6 @@ namespace Bulky.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Tech City",
-                            Name = "Tech Solution",
-                            PhoneNumber = "676799998",
-                            PostalCode = "12121",
-                            State = "IL",
-                            StreetAddress = "123 Tech St"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Innovationville",
-                            Name = "Innovate Inc.",
-                            PhoneNumber = "1234567890",
-                            PostalCode = "98765",
-                            State = "CA",
-                            StreetAddress = "456 Innovation Ave"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "Widgetville",
-                            Name = "Widget World",
-                            PhoneNumber = "5555555555",
-                            PostalCode = "54321",
-                            State = "NY",
-                            StreetAddress = "789 Widget Lane"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            City = "Gizmoville",
-                            Name = "Gizmo Enterprises",
-                            PhoneNumber = "9998887777",
-                            PostalCode = "44444",
-                            State = "TX",
-                            StreetAddress = "101 Gizmo Road"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            City = "Techtopia",
-                            Name = "Tech Innovators",
-                            PhoneNumber = "7777777777",
-                            PostalCode = "66666",
-                            State = "AZ",
-                            StreetAddress = "321 Innovation Blvd"
-                        });
                 });
 
             modelBuilder.Entity("Bulky.Models.Product", b =>
@@ -492,10 +443,6 @@ namespace Bulky.DataAccess.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -508,8 +455,6 @@ namespace Bulky.DataAccess.Migrations
 
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -574,17 +519,6 @@ namespace Bulky.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Bulky.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("Bulky.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

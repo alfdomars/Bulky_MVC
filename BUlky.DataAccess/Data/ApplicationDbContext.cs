@@ -15,6 +15,7 @@ namespace Bulky.DataAccess.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,59 @@ namespace Bulky.DataAccess.Data
                 new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
                 new Category { Id = 3, Name = "Histoy", DisplayOrder = 3 }
                 );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company
+                {
+                    Id = 1,
+                    Name = "Tech Solution",
+                    StreetAddress = "123 Tech St",
+                    City = "Tech City",
+                    PostalCode = "12121",
+                    State = "IL",
+                    PhoneNumber = "676799998"
+                },
+                new Company
+                {
+                    Id = 2,
+                    Name = "Innovate Inc.",
+                    StreetAddress = "456 Innovation Ave",
+                    City = "Innovationville",
+                    PostalCode = "98765",
+                    State = "CA",
+                    PhoneNumber = "1234567890"
+                },
+                new Company
+                {
+                    Id = 3,
+                    Name = "Widget World",
+                    StreetAddress = "789 Widget Lane",
+                    City = "Widgetville",
+                    PostalCode = "54321",
+                    State = "NY",
+                    PhoneNumber = "5555555555"
+                },
+                new Company
+                {
+                    Id = 4,
+                    Name = "Gizmo Enterprises",
+                    StreetAddress = "101 Gizmo Road",
+                    City = "Gizmoville",
+                    PostalCode = "44444",
+                    State = "TX",
+                    PhoneNumber = "9998887777"
+                },
+                new Company
+                {
+                    Id = 5,
+                    Name = "Tech Innovators",
+                    StreetAddress = "321 Innovation Blvd",
+                    City = "Techtopia",
+                    PostalCode = "66666",
+                    State = "AZ",
+                    PhoneNumber = "7777777777"
+                }
+               );
 
             modelBuilder.Entity<Product>().HasData(
                 new Product
